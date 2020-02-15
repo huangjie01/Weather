@@ -1,0 +1,73 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.61'
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+project.ext {
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.2",
+            applicationId    : "com.huangjie.weather",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    def appcompat_version = "1.0.2"
+    def material_version = "1.0.0"
+    def retrofit2_version = "2.5.0"
+    def okHttp3_version = "3.12.0"
+    def roomVersion = '2.1.0'
+    def lifecycle_version = "2.1.0"
+    def workVersion = "2.1.0"
+    def coroutinesVersion = "1.3.0-M2"
+
+    dependencies = [
+            "kotlin-stdlib-jdk7"        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            "appcompat"                 : "androidx.appcompat:appcompat:$appcompat_version",
+            "material"                  : "com.google.android.material:material:$material_version",
+            "core-ktx"                  : "androidx.core:core-ktx:1.0.2",
+            "kotlinx-coroutines-core"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1",
+            "kotlinx-coroutines-android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1",
+            "retrofit"                  : "com.squareup.retrofit2:retrofit:$retrofit2_version",
+            "okhttp"                    : "com.squareup.okhttp3:okhttp:$okHttp3_version",
+            "logging-interceptor"       : "com.squareup.okhttp3:logging-interceptor:3.11.0",
+            "SmartRefreshLayout"        : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.3",
+            "SmartRefreshHeader"        : "com.scwang.smartrefresh:SmartRefreshHeader:1.0.3",
+            "room-runtime"              : "androidx.room:room-runtime:$roomVersion",
+            "room-ktx"                  : "androidx.room:room-ktx:$roomVersion",
+            "lifecycle-extensions"      : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            "lifecycle-compiler"        : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version",
+            "lifecycle-reactivestreams" : "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version",
+            "work-runtime-ktx"          : "androidx.work:work-runtime-ktx:$workVersion",
+            "kotlinx-coroutines-android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+            "kotlinx-coroutines-core"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            "room-compiler":"androidx.room:room-compiler:$roomVersion"
+    ]
+
+}
