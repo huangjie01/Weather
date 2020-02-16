@@ -23,4 +23,5 @@ class CityRepository private constructor(private val cityDao: CityDao) {
             instance ?: CityRepository(cityDao).also { instance = it }
         }
     }
+
 }

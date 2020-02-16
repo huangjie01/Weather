@@ -45,7 +45,7 @@ class ChoiceCityActivity : BaseActivity() {
 
     private fun subscribeUi() {
         cityViewModel.cityList.observe(this, Observer {
-            Log.e("huangjie", it.toString())
+            Log.e("weather", it.toString())
         })
     }
 
