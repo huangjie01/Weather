@@ -13,7 +13,13 @@ class CityRepository private constructor(private val cityDao: CityDao) {
     fun searchCity(cityId: Int) = cityDao.load(cityId)
 
     fun loadCityData(): MutableList<City> {
-        return cityDao.loadAllCity()
+        return mockCityData()
+    }
+
+    private fun mockCityData(): MutableList<City> {
+        val mutableList = mutableListOf<City>()
+        mutableList.add(City(110, "", "", 123, "成都", "", "", ""))
+        return mutableList
     }
 
     companion object {

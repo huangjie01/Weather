@@ -2,7 +2,6 @@ package com.huangjie.weather.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -27,15 +26,17 @@ class CityAdapter : ListAdapter<City, CityAdapter.ViewHolder>(CityDiffCallback()
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(binding: ListItemCityBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private  val binding: ListItemCityBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 LogUtils.error(it.toString())
             }
         }
 
-        fun bind(city: City) {
-
+        fun bind(item: City) {
+            binding.apply{
+                city=item
+            }
         }
     }
 }

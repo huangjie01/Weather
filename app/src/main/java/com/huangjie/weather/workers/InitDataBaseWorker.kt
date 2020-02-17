@@ -7,6 +7,7 @@ import androidx.work.WorkerParameters
 import com.huangjie.weather.R
 import com.huangjie.weather.constants.CITY_DATABASE_NAME
 import com.huangjie.weather.global.GlobalApplication
+import com.huangjie.weather.utils.LogUtils
 import kotlinx.coroutines.coroutineScope
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -36,7 +37,7 @@ class InitDataBaseWorker(context: Context, workerParameters: WorkerParameters) :
                 fileOutputStream.write(buffer)
                 Result.success()
             } catch (exception: Exception) {
-                Log.e(InitDataBaseWorker::class.java.simpleName, exception.message)
+              LogUtils.error(exception.message!!)
                 Result.failure()
             } finally {
                 it.close()

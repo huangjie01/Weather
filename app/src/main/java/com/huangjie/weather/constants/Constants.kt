@@ -5,4 +5,4 @@ package com.huangjie.weather.constants
  * @version 2020-02-09 12:42
  * @author huangjie
  */
-const val CITY_DATABASE_NAME = "city-db"
+const val CITY_DATABASE_NAME = "city.db"
