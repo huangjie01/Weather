@@ -24,7 +24,6 @@ class CityRepository private constructor(private val cityDao: CityDao) {
 
     companion object {
         private var instance: CityRepository? = null
-
         fun getInstance(cityDao: CityDao) = instance ?: synchronized(this) {
             instance ?: CityRepository(cityDao).also { instance = it }
         }
