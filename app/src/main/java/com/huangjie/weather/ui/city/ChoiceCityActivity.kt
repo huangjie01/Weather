@@ -11,6 +11,7 @@ import com.huangjie.weather.R
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.ui.city.viewmodel.CityViewModel
 import com.huangjie.weather.utils.InjectUtils
+import kotlinx.android.synthetic.main.activity_choice_city.*
 import kotlinx.android.synthetic.main.layout_app_main.*
 
 /**
@@ -40,7 +41,14 @@ class ChoiceCityActivity : BaseActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         setSupportActionBar(mToolbar)
+        initView()
         subscribeUi()
+    }
+
+    private fun initView() {
+        mRecycleCity.setHasFixedSize(true)
+        mRecycleCity.setItemViewCacheSize(20)
+
     }
 
     private fun subscribeUi() {
