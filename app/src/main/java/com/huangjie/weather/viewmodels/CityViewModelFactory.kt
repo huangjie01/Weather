@@ -15,8 +15,6 @@ class CityViewModelFactory(private val cityRepository: CityRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return CityViewModel(
-            cityRepository
-        ) as T
+        return CityViewModel(cityRepository) as T
     }
 }

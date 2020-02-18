@@ -1,11 +1,9 @@
 package com.huangjie.weather.database
 
 import android.content.Context
-import androidx.databinding.adapters.Converters
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -42,18 +40,20 @@ abstract class AppDatabase : RoomDatabase() {
 
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
+
                         val dbFile = File(
                             GlobalApplication.context.getDatabasePath(
                                 CITY_DATABASE_NAME
                             ).absolutePath
                         )
-                        if (!dbFile.exists()) {
+
+                        //if (!dbFile.exists()) {
                             val request =
                                 OneTimeWorkRequest.Builder(InitDataBaseWorker::class.java).build()
                             WorkManager.getInstance(context).enqueue(request)
-                        }
+                       // }
                     }
-                }).build()
+                }).allowMainThreadQueries().build()
         }
 
     }

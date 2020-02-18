@@ -3,14 +3,19 @@ package com.huangjie.weather.ui.city
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.huangjie.weather.R
+import com.huangjie.weather.adapter.CityAdapter
 import com.huangjie.weather.base.BaseActivity
+import com.huangjie.weather.databinding.ActivityChoiceCityBinding
 import com.huangjie.weather.ui.city.viewmodel.CityViewModel
 import com.huangjie.weather.utils.InjectUtils
+import com.huangjie.weather.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_choice_city.*
 import kotlinx.android.synthetic.main.layout_app_main.*
 
@@ -34,7 +39,10 @@ class ChoiceCityActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choice_city)
+        val binding = DataBindingUtil.setContentView<ActivityChoiceCityBinding>(
+            this,
+            R.layout.activity_choice_city
+        )
         cityViewModel =
             InjectUtils.providerCityViewModelFactory(this).create(CityViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,18 +50,24 @@ class ChoiceCityActivity : BaseActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         setSupportActionBar(mToolbar)
         initView()
-        subscribeUi()
+        val adapter = CityAdapter()
+        binding.mRecycleCity.adapter = adapter
+        cityViewModel.loadData()
+        subscribeUi(adapter)
     }
 
     private fun initView() {
         mRecycleCity.setHasFixedSize(true)
         mRecycleCity.setItemViewCacheSize(20)
+        mRecycleCity.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
 
     }
 
-    private fun subscribeUi() {
+
+    private fun subscribeUi(adapter: CityAdapter) {
         cityViewModel.cityList.observe(this, Observer {
-            Log.e("huangjie", it.toString())
+            LogUtils.error("是否为空 " + (it == null))
+            adapter.submitList(it)
         })
     }
 

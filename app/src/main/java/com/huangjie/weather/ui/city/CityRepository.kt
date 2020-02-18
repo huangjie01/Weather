@@ -2,6 +2,7 @@ package com.huangjie.weather.ui.city
 
 import com.huangjie.weather.data.City
 import com.huangjie.weather.database.CityDao
+import com.huangjie.weather.utils.LogUtils
 
 /**
  * @blame 黄杰
@@ -13,7 +14,19 @@ class CityRepository private constructor(private val cityDao: CityDao) {
     fun searchCity(cityId: Int) = cityDao.load(cityId)
 
     fun loadCityData(): MutableList<City> {
+        LogUtils.error("数据库查询： " + cityDao.loadAllCity().size)
         return cityDao.loadAllCity()
+    }
+
+    private fun mockCityData(): MutableList<City> {
+        val mutableList = mutableListOf<City>()
+        mutableList.add(City(110, "", "", 123, "成都", "", "", ""))
+        mutableList.add(City(120, "", "", 124, "彭山", "", "", ""))
+        mutableList.add(City(130, "", "", 125, "上海", "", "", ""))
+        mutableList.add(City(140, "", "", 126, "北京", "", "", ""))
+        mutableList.add(City(150, "", "", 127, "西安", "", "", ""))
+
+        return mutableList
     }
 
     companion object {
@@ -23,4 +36,5 @@ class CityRepository private constructor(private val cityDao: CityDao) {
             instance ?: CityRepository(cityDao).also { instance = it }
         }
     }
+
 }

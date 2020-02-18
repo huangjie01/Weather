@@ -16,6 +16,9 @@ import com.huangjie.weather.databinding.ActivityMainBinding
 import com.huangjie.weather.ui.city.ChoiceCityActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_app_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +27,11 @@ class MainActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setSupportActionBar(mToolbar)
         initView()
+        GlobalScope.launch {
+            delay(1000)
+            println("word")
+        }
+        println("hello ")
     }
 
 
