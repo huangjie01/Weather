@@ -52,8 +52,9 @@ class ChoiceCityActivity : BaseActivity() {
         initView()
         val adapter = CityAdapter()
         binding.mRecycleCity.adapter = adapter
-        cityViewModel.loadData()
         subscribeUi(adapter)
+        cityViewModel.loadData()
+
     }
 
     private fun initView() {
@@ -66,7 +67,7 @@ class ChoiceCityActivity : BaseActivity() {
 
     private fun subscribeUi(adapter: CityAdapter) {
         cityViewModel.cityList.observe(this, Observer {
-            LogUtils.error("是否为空 " + (it == null))
+            LogUtils.error("是否为空 " + (it[0].toString()))
             adapter.submitList(it)
         })
     }

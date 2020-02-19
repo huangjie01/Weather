@@ -21,7 +21,7 @@
         android:gravity="center_vertical"
         android:onClick="@{clickListener}"
         android:paddingLeft="15dp"
-        android:text="@{city.cityName}"
+        android:text="@{city.parent+city.cityName}"
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 </layout>

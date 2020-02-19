@@ -38,18 +38,6 @@ abstract class AppDatabase : RoomDatabase() {
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-
-                        val dbFile = File(
-                            GlobalApplication.context.getDatabasePath(
-                                CITY_DATABASE_NAME
-                            ).absolutePath
-                        )
-
-                        //if (!dbFile.exists()) {
-                            val request =
-                                OneTimeWorkRequest.Builder(InitDataBaseWorker::class.java).build()
-                            WorkManager.getInstance(context).enqueue(request)
-                       // }
                     }
                 }).allowMainThreadQueries().build()
         }

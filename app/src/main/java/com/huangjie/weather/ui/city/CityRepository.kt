@@ -3,6 +3,8 @@ package com.huangjie.weather.ui.city
 import com.huangjie.weather.data.City
 import com.huangjie.weather.database.CityDao
 import com.huangjie.weather.utils.LogUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 /**
  * @blame 黄杰
@@ -14,7 +16,7 @@ class CityRepository private constructor(private val cityDao: CityDao) {
     fun searchCity(cityId: Int) = cityDao.load(cityId)
 
     fun loadCityData(): MutableList<City> {
-        LogUtils.error("数据库查询： " + cityDao.loadAllCity().size)
+
         return cityDao.loadAllCity()
     }
 

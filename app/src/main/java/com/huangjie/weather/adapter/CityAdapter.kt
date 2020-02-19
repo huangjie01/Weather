@@ -35,6 +35,7 @@ class CityAdapter : ListAdapter<City, CityAdapter.ViewHolder>(CityDiffCallback()
         }
 
         fun bind(item: City) {
+             LogUtils.error(item.cityName)
             binding.apply{
                 city=item
             }

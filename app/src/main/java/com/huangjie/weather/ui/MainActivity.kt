@@ -12,11 +12,14 @@ import android.view.WindowManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.huangjie.weather.R
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.databinding.ActivityMainBinding
 import com.huangjie.weather.ui.city.ChoiceCityActivity
 import com.huangjie.weather.utils.LogUtils
+import com.huangjie.weather.workers.InitDataBaseWorker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_app_main.*
 import kotlinx.coroutines.*
@@ -31,30 +34,34 @@ class MainActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setSupportActionBar(mToolbar)
         initView()
-        GlobalScope.launch {
-            delay(1000)
-            println("word")
-        }
-        println("hello ")
+        /* CoroutineScope(Dispatchers.Main).launch {
+             LogUtils.error("当前线程" + Thread.currentThread().name)
+             val bitmap = withContext(Dispatchers.IO) {
+                 LogUtils.error("当前线程" + Thread.currentThread().name)
+                 getImage()
+             }
+             weather_icon_image_view.setImageBitmap(bitmap)
+         }*/
 
         CoroutineScope(Dispatchers.Main).launch {
-            LogUtils.error("当前线程" + Thread.currentThread().name)
             val bitmap = withContext(Dispatchers.IO) {
-                LogUtils.error("当前线程" + Thread.currentThread().name)
                 getImage()
             }
             weather_icon_image_view.setImageBitmap(bitmap)
         }
+
     }
 
-    private fun getImage(): Bitmap {
+
+    suspend fun getImage():Bitmap {
         val urlParams = URL("http://img4.imgtn.bdimg.com/it/u=1694681277,1453280371&fm=26&gp=0.jpg")
         val connection = urlParams.openConnection() as HttpURLConnection
-          connection.requestMethod="GET"
+        connection.requestMethod = "GET"
         connection.connect()
         val inputStream: InputStream = connection.inputStream
-        return BitmapFactory.decodeStream(inputStream)
-        //inputStream.close()
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        inputStream.close()
+        return bitmap
     }
 
 
