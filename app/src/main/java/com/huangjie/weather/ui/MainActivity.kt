@@ -1,5 +1,7 @@
 package com.huangjie.weather.ui
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,8 +16,13 @@ import com.huangjie.weather.R
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.databinding.ActivityMainBinding
 import com.huangjie.weather.ui.city.ChoiceCityActivity
+import com.huangjie.weather.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_app_main.*
+import kotlinx.coroutines.*
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +31,30 @@ class MainActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setSupportActionBar(mToolbar)
         initView()
+        GlobalScope.launch {
+            delay(1000)
+            println("word")
+        }
+        println("hello ")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            LogUtils.error("当前线程" + Thread.currentThread().name)
+            val bitmap = withContext(Dispatchers.IO) {
+                LogUtils.error("当前线程" + Thread.currentThread().name)
+                getImage()
+            }
+            weather_icon_image_view.setImageBitmap(bitmap)
+        }
+    }
+
+    private fun getImage(): Bitmap {
+        val urlParams = URL("http://img4.imgtn.bdimg.com/it/u=1694681277,1453280371&fm=26&gp=0.jpg")
+        val connection = urlParams.openConnection() as HttpURLConnection
+          connection.requestMethod="GET"
+        connection.connect()
+        val inputStream: InputStream = connection.inputStream
+        return BitmapFactory.decodeStream(inputStream)
+        //inputStream.close()
     }
 
 

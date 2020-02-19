@@ -19,8 +19,11 @@ import java.lang.Exception
 
 class InitDataBaseWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters) {
+
     override suspend fun doWork(): Result = coroutineScope {
+
         GlobalApplication.context.resources.openRawResource(R.raw.city).use {
+            LogUtils.error("InitDataBaseWorker")
             val dbFile = GlobalApplication.context.getDatabasePath(CITY_DATABASE_NAME)
             if (!dbFile.parentFile.exists()) {
                 dbFile.mkdir()
@@ -36,7 +39,7 @@ class InitDataBaseWorker(context: Context, workerParameters: WorkerParameters) :
                 fileOutputStream.write(buffer)
                 Result.success()
             } catch (exception: Exception) {
-              LogUtils.error(exception.message!!)
+                LogUtils.error(exception.message!!)
                 Result.failure()
             } finally {
                 it.close()

@@ -5,14 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.huangjie.weather.R
 import com.huangjie.weather.adapter.CityAdapter
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.databinding.ActivityChoiceCityBinding
 import com.huangjie.weather.ui.city.viewmodel.CityViewModel
 import com.huangjie.weather.utils.InjectUtils
+import com.huangjie.weather.utils.LogUtils
+import kotlinx.android.synthetic.main.activity_choice_city.*
 import kotlinx.android.synthetic.main.layout_app_main.*
 
 /**
@@ -45,13 +49,24 @@ class ChoiceCityActivity : BaseActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         setSupportActionBar(mToolbar)
+        initView()
         val adapter = CityAdapter()
         binding.mRecycleCity.adapter = adapter
+        cityViewModel.loadData()
         subscribeUi(adapter)
     }
 
+    private fun initView() {
+        mRecycleCity.setHasFixedSize(true)
+        mRecycleCity.setItemViewCacheSize(20)
+        mRecycleCity.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
+
+    }
+
+
     private fun subscribeUi(adapter: CityAdapter) {
         cityViewModel.cityList.observe(this, Observer {
+            LogUtils.error("是否为空 " + (it == null))
             adapter.submitList(it)
         })
     }

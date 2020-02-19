@@ -10,12 +10,17 @@ import com.huangjie.weather.ui.city.CityRepository
  * @version 2020-02-02 23:46
  * @author huangjie
  */
-class CityViewModel internal constructor(cityRepository: CityRepository) : ViewModel() {
+class CityViewModel(private val cityRepository: CityRepository) : ViewModel() {
 
-    val cityList: MutableLiveData<List<City>> by lazy {
-        MutableLiveData<List<City>>().also {
-            cityRepository.loadCityData()
-        }
+    val cityList: MutableLiveData<List<City>> = MutableLiveData()
+
+    /*by lazy {
+MutableLiveData<List<City>>().also {
+     cityRepository.loadCityData()
+}*/
+
+    fun loadData() {
+        cityList.postValue(cityRepository.loadCityData())
     }
 
 }
