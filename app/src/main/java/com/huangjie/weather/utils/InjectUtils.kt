@@ -2,7 +2,7 @@ package com.huangjie.weather.utils
 
 import android.content.Context
 import com.huangjie.weather.database.AppDatabase
-import com.huangjie.weather.ui.city.CityRepository
+import com.huangjie.weather.repository.CityRepository
 import com.huangjie.weather.viewmodels.CityViewModelFactory
 
 /**

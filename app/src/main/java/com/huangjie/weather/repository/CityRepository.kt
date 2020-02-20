@@ -1,8 +1,11 @@
-package com.huangjie.weather.ui.city
+package com.huangjie.weather.repository
 
 import com.huangjie.weather.data.City
 import com.huangjie.weather.database.CityDao
 import com.huangjie.weather.utils.LogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 /**
  * @blame 黄杰
@@ -11,11 +14,15 @@ import com.huangjie.weather.utils.LogUtils
  */
 class CityRepository private constructor(private val cityDao: CityDao) {
 
-    fun searchCity(cityId: Int) = cityDao.load(cityId)
+    fun searchCity(cityId: Int) = runBlocking {
+        cityDao.load(cityId)
+    }
 
-    fun loadCityData(): MutableList<City> {
-        LogUtils.error("数据库查询： " + cityDao.loadAllCity().size)
-        return cityDao.loadAllCity()
+    fun loadCityData(): MutableList<City> = runBlocking {
+        withContext(Dispatchers.IO) {
+            LogUtils.error(Thread.currentThread().name)
+            cityDao.loadAllCity()
+        }
     }
 
     private fun mockCityData(): MutableList<City> {
@@ -31,9 +38,11 @@ class CityRepository private constructor(private val cityDao: CityDao) {
 
     companion object {
         private var instance: CityRepository? = null
-        fun getInstance(cityDao: CityDao) = instance ?: synchronized(this) {
-            instance ?: CityRepository(cityDao).also { instance = it }
-        }
+        fun getInstance(cityDao: CityDao) = instance
+            ?: synchronized(this) {
+                instance
+                    ?: CityRepository(cityDao).also { instance = it }
+            }
     }
 
 }

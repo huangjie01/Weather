@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">天气预报</string>
+    <string name="app_name">天气</string>
     <string name="navigation_drawer_open" />
     <string name="navigation_drawer_close" />
     <string name="action_add_city">添加城市</string>
+    <string name="divider">.</string>
+
 </resources>

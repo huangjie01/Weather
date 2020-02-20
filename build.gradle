@@ -32,7 +32,7 @@ project.ext {
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.2",
             applicationId    : "com.huangjie.weather",
-            minSdkVersion    : 21,
+            minSdkVersion    : 24,
             targetSdkVersion : 29,
             versionCode      : 1,
             versionName      : "1.0"
@@ -67,7 +67,9 @@ project.ext {
             "work-runtime-ktx"          : "androidx.work:work-runtime-ktx:$workVersion",
             "kotlinx-coroutines-android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
             "kotlinx-coroutines-core"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
-            "room-compiler":"androidx.room:room-compiler:$roomVersion"
+            "room-compiler"             : "androidx.room:room-compiler:$roomVersion",
+            "room-coroutines"           : "androidx.room:room-coroutines:2.1.0-alpha04"
+
     ]
 
 }

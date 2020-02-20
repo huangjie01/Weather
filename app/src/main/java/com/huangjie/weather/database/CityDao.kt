@@ -13,13 +13,14 @@ import com.huangjie.weather.data.City
  */
 @Dao
 interface CityDao {
+
     @Insert(onConflict = REPLACE)
     fun save(city: City)
 
     @Query("SELECT * FROM city WHERE _id=:cityId LIMIT 1")
-    fun load(cityId: Int): City
+    suspend fun load(cityId: Int): City
 
     @Query("SELECT * FROM city")
-    fun loadAllCity(): MutableList<City>
+    suspend fun loadAllCity(): MutableList<City>
 
 }

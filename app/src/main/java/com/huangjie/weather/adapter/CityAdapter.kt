@@ -12,13 +12,16 @@ import com.huangjie.weather.databinding.ListItemCityBinding
 import com.huangjie.weather.utils.LogUtils
 
 class CityAdapter : ListAdapter<City, CityAdapter.ViewHolder>(CityDiffCallback()) {
+
+     var itemClickListener: ItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context)
                 , R.layout.list_item_city, parent, false
-            )
+            ), itemClickListener
         )
     }
 
@@ -26,19 +29,27 @@ class CityAdapter : ListAdapter<City, CityAdapter.ViewHolder>(CityDiffCallback()
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private  val binding: ListItemCityBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ListItemCityBinding,
+        itemClickListener: ItemClickListener?
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
-                LogUtils.error(it.toString())
+                itemClickListener?.click(binding.city)
             }
         }
 
         fun bind(item: City) {
-            binding.apply{
-                city=item
+            LogUtils.error(item.cityName)
+            binding.apply {
+                city = item
             }
         }
+    }
+
+    interface ItemClickListener {
+        fun click(city: City?)
     }
 }
 

@@ -2,8 +2,7 @@ package com.huangjie.weather.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.huangjie.weather.ui.city.CityRepository
-import com.huangjie.weather.ui.city.viewmodel.CityViewModel
+import com.huangjie.weather.repository.CityRepository
 
 /**
  * @blame 黄杰

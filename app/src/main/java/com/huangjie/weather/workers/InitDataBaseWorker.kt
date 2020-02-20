@@ -32,6 +32,7 @@ class InitDataBaseWorker(context: Context, workerParameters: WorkerParameters) :
             if (!dbFile.exists()) {
                 dbFile.createNewFile()
             }
+
             val fileOutputStream = FileOutputStream(dbFile)
             try {
                 val buffer = ByteArray(it.available())

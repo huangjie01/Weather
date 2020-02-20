@@ -68,7 +68,9 @@ dependencies {
     implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]
 
     kapt rootProject.ext.dependencies["room-compiler"]
+    //implementation rootProject.ext.dependencies["room-coroutines"]
 
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
 
 }
