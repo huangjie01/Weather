@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import com.huangjie.weather.R
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.databinding.ActivityMainBinding
+import com.huangjie.weather.repository.WeatherRepository
 import com.huangjie.weather.ui.city.ChoiceCityActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_app_main.*
@@ -24,8 +25,12 @@ class MainActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setSupportActionBar(mToolbar)
         initView()
+        loadData()
     }
 
+    private fun loadData() {
+        WeatherRepository.getInstance().loadWeatherData()
+    }
 
     /**
      * 全屏显示

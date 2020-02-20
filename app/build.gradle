@@ -16,7 +16,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.huangjie.weather"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -68,7 +68,10 @@ dependencies {
     implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]
 
     kapt rootProject.ext.dependencies["room-compiler"]
-    //implementation rootProject.ext.dependencies["room-coroutines"]
+
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit2-kotlin-coroutines-adapter"]
+
 
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
 

@@ -68,7 +68,9 @@ project.ext {
             "kotlinx-coroutines-android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
             "kotlinx-coroutines-core"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
             "room-compiler"             : "androidx.room:room-compiler:$roomVersion",
-            "room-coroutines"           : "androidx.room:room-coroutines:2.1.0-alpha04"
+            "room-coroutines"           : "androidx.room:room-coroutines:2.1.0-alpha04",
+            "converter-gson":"com.squareup.retrofit2:converter-gson:2.4.0",
+            "retrofit2-kotlin-coroutines-adapter":"com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
     ]
 

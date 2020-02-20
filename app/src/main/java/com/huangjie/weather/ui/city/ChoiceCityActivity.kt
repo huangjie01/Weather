@@ -18,6 +18,7 @@ import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.data.City
 import com.huangjie.weather.databinding.ActivityChoiceCityBinding
 import com.huangjie.weather.utils.InjectUtils
+import com.huangjie.weather.utils.LogUtils
 import com.huangjie.weather.viewmodels.CityViewModel
 import kotlinx.android.synthetic.main.activity_choice_city.*
 import kotlinx.android.synthetic.main.layout_app_main.*
@@ -66,7 +67,8 @@ class ChoiceCityActivity : BaseActivity() {
     private fun initEvent() {
         mAdapter.itemClickListener = object : CityAdapter.ItemClickListener {
             override fun click(city: City?) {
-                Toast.makeText(this@ChoiceCityActivity, city?.cityName, Toast.LENGTH_SHORT).show()
+                LogUtils.error("CityID  "+city?.cityId)
+                Toast.makeText(this@ChoiceCityActivity, "id "+city?.cityId, Toast.LENGTH_SHORT).show()
             }
         }
     }
