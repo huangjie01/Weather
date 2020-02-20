@@ -26,7 +26,8 @@ class CityAdapter : ListAdapter<City, CityAdapter.ViewHolder>(CityDiffCallback()
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private  val binding: ListItemCityBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private  val binding: ListItemCityBinding)
+        : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 LogUtils.error(it.toString())
