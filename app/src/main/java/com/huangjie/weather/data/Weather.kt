@@ -1,6 +1,6 @@
 package com.huangjie.weather.data
 
- data class Weather(
+data class Weather(
     val alerts: List<Any>,
     val aqi: Aqi,
     val brandInfo: BrandInfo,
@@ -12,13 +12,9 @@ package com.huangjie.weather.data
     val preHour: List<PreHour>,
     val sourceMaps: SourceMaps,
     val updateTime: Long,
-    val url: Url,
     val yesterday: Yesterday
 )
 
-data class Aqi(
-    val status: Int
-)
 
 data class BrandInfo(
     val brands: List<Brand>
@@ -42,71 +38,30 @@ data class Ch(
 )
 
 data class Current(
-    val feelsLike: FeelsLike,
-    val humidity: Humidity,
-    val pressure: Pressure,
+    val feelsLike: WeatherValue,
+    val humidity: WeatherValue,
+    val pressure: WeatherValue,
     val pubTime: String,
-    val temperature: Temperature,
+    val temperature: WeatherValue,
     val uvIndex: String,
-    val visibility: Visibility,
+    val visibility: WeatherValue,
     val weather: String,
     val wind: Wind
 )
 
-data class FeelsLike(
-    val unit: String,
-    val value: String
-)
+data class WeatherValue(var unit: String, var value: String)
 
-data class Humidity(
-    val unit: String,
-    val value: String
-)
-
-data class Pressure(
-    val unit: String,
-    val value: String
-)
-
-data class Temperature(
-    val unit: String,
-    val value: String
-)
-
-data class Visibility(
-    val unit: String,
-    val value: String
-)
-
-data class Wind(
-    val direction: Direction,
-    val speed: Speed
-)
-
-data class Direction(
-    val unit: String,
-    val value: String
-)
-
-data class Speed(
-    val unit: String,
-    val value: String
-)
 
 data class ForecastDaily(
-    val aqi: AqiX,
     val precipitationProbability: PrecipitationProbability,
     val pubTime: String,
     val status: Int,
     val sunRiseSet: SunRiseSet,
     val temperature: TemperatureX,
-    val weather: WeatherX,
-    val wind: WindX
+    val weather: WeatherX
+    //val wind: Wind
 )
 
-data class AqiX(
-    val status: Int
-)
 
 data class PrecipitationProbability(
     val status: Int,
@@ -123,66 +78,42 @@ data class Value(
     val to: String
 )
 
+
 data class TemperatureX(
     val status: Int,
     val unit: String,
-    val value: List<ValueX>
+    val value: List<Value>
 )
 
-data class ValueX(
-    val from: String,
-    val to: String
-)
 
 data class WeatherX(
     val status: Int,
-    val value: List<ValueXX>
+    val value: List<Value>
 )
 
-data class ValueXX(
-    val from: String,
-    val to: String
-)
-
-data class WindX(
-    val direction: DirectionX,
-    val speed: SpeedX
-)
 
 data class DirectionX(
     val status: Int,
     val unit: String,
-    val value: List<ValueXXX>
+    val value: List<Value>
 )
 
-data class ValueXXX(
-    val from: String,
-    val to: String
-)
 
 data class SpeedX(
     val status: Int,
     val unit: String,
-    val value: List<ValueXXXX>
+    val value: List<Value>
 )
 
-data class ValueXXXX(
-    val from: String,
-    val to: String
-)
 
 data class ForecastHourly(
-    val aqi: AqiXX,
     val desc: String,
     val status: Int,
     val temperature: TemperatureXX,
-    val weather: WeatherXX,
-    val wind: WindXX
+    val weather: WeatherXX
+    //val wind: WindXX
 )
 
-data class AqiXX(
-    val status: Int
-)
 
 data class TemperatureXX(
     val pubTime: String,
@@ -197,16 +128,13 @@ data class WeatherXX(
     val value: List<Int>
 )
 
-data class WindXX(
+/*data class WindXX(
     val status: Int,
-    val value: List<ValueXXXXX>
-)
+    val value: List<WindValue>
+)*/
 
-data class ValueXXXXX(
-    val datetime: String,
-    val direction: String,
-    val speed: String
-)
+data class WindValue(var datetime: String, var direction: String, var speed: String)
+
 
 data class Indices(
     val indices: List<Indice>,
@@ -220,21 +148,18 @@ data class Indice(
 )
 
 data class PreHour(
-    val aqi: AqiXXX,
-    val feelsLike: FeelsLikeX,
-    val humidity: HumidityX,
-    val pressure: PressureX,
+    val feelsLike: UnitValue,
+    val humidity: UnitValue,
+    val pressure: UnitValue,
     val pubTime: String,
-    val temperature: TemperatureXXX,
+    val temperature: UnitValue,
     val uvIndex: String,
-    val visibility: VisibilityX,
+    val visibility: UnitValue,
     val weather: String,
-    val wind: WindXXX
+    val wind: Wind
 )
 
-data class AqiXXX(
-    val aqi: String,
-    val brandInfo: BrandInfoX,
+data class Aqi(
     val co: String,
     val coDesc: String,
     val no2: String,
@@ -271,45 +196,17 @@ data class NamesX(
     val zh_TW: String
 )
 
-data class FeelsLikeX(
+data class UnitValue(
     val unit: String,
     val value: String
 )
 
-data class HumidityX(
-    val unit: String,
-    val value: String
+
+data class Wind(
+    val direction: UnitValue,
+    val speed: UnitValue
 )
 
-data class PressureX(
-    val unit: String,
-    val value: String
-)
-
-data class TemperatureXXX(
-    val unit: String,
-    val value: String
-)
-
-data class VisibilityX(
-    val unit: String,
-    val value: String
-)
-
-data class WindXXX(
-    val direction: DirectionXX,
-    val speed: SpeedXX
-)
-
-data class DirectionXX(
-    val unit: String,
-    val value: String
-)
-
-data class SpeedXX(
-    val unit: String,
-    val value: String
-)
 
 data class SourceMaps(
     val current: CurrentX,
@@ -342,10 +239,6 @@ data class Hourly(
     val weather: String
 )
 
-data class Url(
-    val caiyun: String,
-    val weathercn: String
-)
 
 data class Yesterday(
     val aqi: String,

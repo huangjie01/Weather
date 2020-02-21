@@ -2,9 +2,11 @@ package com.huangjie.weather.http
 
 import com.huangjie.weather.global.GlobalApplication
 import com.huangjie.weather.http.intercept.HttpIntercept
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +33,8 @@ object HttpClientManager {
     private fun retrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("http://gank.io/api/")
         .client(okHttpclient)
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val httpclient: HttpInterface = retrofit().create(HttpInterface::class.java)
