@@ -12,14 +12,14 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
 
     fun loadWeatherData() {
         CoroutineScope(Dispatchers.Main).launch {
-            loadData()
+            weather.postValue(loadData())
         }
     }
 
     private suspend fun loadData(): Weather {
         val weather = withContext(Dispatchers.IO) {
-            weatherRepository.loadWeatherData()
+            weatherRepository.loadWeatherDataAsyn()
         }
-        return
+        return weather.await()
     }
 }

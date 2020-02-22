@@ -10,15 +10,19 @@ import android.view.WindowManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.huangjie.weather.R
 import com.huangjie.weather.base.BaseActivity
 import com.huangjie.weather.databinding.ActivityMainBinding
-import com.huangjie.weather.repository.WeatherRepository
 import com.huangjie.weather.ui.city.ChoiceCityActivity
+import com.huangjie.weather.utils.InjectUtils
+import com.huangjie.weather.utils.LogUtils
+import com.huangjie.weather.viewmodels.WeatherViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_app_main.*
 
 class MainActivity : BaseActivity() {
+    private lateinit var weatherViewModel: WeatherViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFullScreen()
@@ -29,7 +33,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadData() {
-        WeatherRepository.getInstance().loadWeatherData()
+        weatherViewModel = InjectUtils.providerWeatherModel(this)
+        weatherViewModel.weather.observe(this, Observer {
+            LogUtils.error(it.current.toString())
+        })
+        weatherViewModel.loadWeatherData()
     }
 
     /**
